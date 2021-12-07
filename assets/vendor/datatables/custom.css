@@ -1,0 +1,49 @@
+table.dataTable{
+    width: 100% !important;
+    border-collapse: collapse !important;
+}
+table.dataTable thead .sorting_asc {
+    background-image: url(https://cdn.datatables.net/1.10.16/images/sort_asc.png);
+}
+table.dataTable thead .sorting_desc {
+    background-image: url(https://cdn.datatables.net/1.10.16/images/sort_desc.png);
+}
+table.dataTable thead .sorting {
+    background-image: url(https://cdn.datatables.net/1.10.16/images/sort_both.png);
+}
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+table.dataTable thead .sorting:before, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_desc_disabled:before {
+    right: unset;
+    content: unset;
+}
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+    right: unset;
+    content: unset;
+}
+.dataTables_length label select {
+    height: calc(1.5em + .5rem + 2px) !important;
+    padding: .25rem .5rem !important;
+    width: 65px !important;
+}
+.table, table.datatable {
+    margin-top: unset !important;
+    margin-bottom: unset !important;
+}
+.dataTables_length, .dataTables_filter, .dataTables_paginate, .paging_simple_numbers {
+    margin: 15px !important;
+    padding-top: unset !important;
+}
+
+.dataTables_info {
+    margin: 23px 15px !important;
+    padding-top: unset !important;
+}
+
+.dataTables_length label, .dataTables_filter label {
+    margin-bottom: unset !important;
+}

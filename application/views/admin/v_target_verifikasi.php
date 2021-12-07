@@ -1,0 +1,412 @@
+
+
+<!--Counter Inbox-->
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <?php 
+  $this->load->view('admin/parsial/v_head'); ?>
+
+</head>
+
+
+<body class="hold-transition skin-red sidebar-mini">
+  <div class="wrapper">
+
+    <?php
+    $this->load->view('admin/parsial/v_header');
+  ?>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <?php
+    $this->load->view('admin/parsial/v_sidebar');
+    ?>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+        Profil <b><?= $_SESSION['nama_lengkap']; ?></b>
+          <small></small>
+        </h1>
+      </section>
+
+      <!-- Main content -->
+         <!-- Main content -->
+    <section class="content">
+
+<div class="row">
+  <div class="col-md-3">
+
+    <!-- Profile Image -->
+    <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Identitas Anda</h3>
+
+                </div>
+      <div class="box-body">
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <b>Tgl. Daftar  : </b> <a class="pull-right"><strong><?= $data_profil['created_at']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Kode :</b> <a class="pull-right"><strong><?= $data_profil['kode_user']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Nama Lengkap :</b> <a class="pull-right"><strong><?= $data_profil['nama_lengkap']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Alamat :</b> <a class="pull-right"><strong><?= $data_profil['alamat']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Desa :</b> <a class="pull-right"><strong><?= $data_profil['desa']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Kecamatan :</b> <a class="pull-right"><strong><?= $data_profil['kecamatan']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Kabupaten :</b> <a class="pull-right"><strong><?= $data_profil['kabupaten']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Email :</b> <a class="pull-right"><strong><?= $data_profil['email']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Telpon :</b> <a class="pull-right"><strong><?= $data_profil['telp']; ?></strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Terakhir Update: </b><?php  echo last_updated() != "" ? last_updated() : 0 ?><a class="pull-right"></a>
+          </li>
+        </ul>
+
+        
+        <a href="<?= base_url('admin/usaha/target_verifikasi/'.$data_profil['kode_user']); ?>" class="btn btn-primary btn-block"><b>Segarkan</b></a>
+
+         </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+    <!-- About Me Box -->
+
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+  <div class="col-md-9">
+    <div class="box box-primary">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Daftar Sebaran Usaha</h3>
+
+                </div>
+
+                <div class="box-body">
+                        <!-- /.box-header -->
+                         
+            <div class="box-body">
+                <?php if (substr($_SESSION['nama_lengkap'], 0, 2)) { 
+                ?> 
+                <table id="dtHorizontalExample" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                                <th>No. </th>
+                                <th>Desa</th>
+                                <th>Kecamatan</th>
+                                <th>Kabupaten</th>
+                                <th>Total</th>
+                                <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($data_sebaran_usaha as $row) :
+                        ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $row->desa; ?></td>
+                            <td><?= $row->kecamatan; ?></td>
+                            <td><?= $row->kabupaten; ?></td>
+                            <td><?= $row->total; ?></td>
+                            <td>
+                      
+                                <a href="<?= base_url('admin/user/tambahkan_ke_target/').$row->desa."/".$data_profil['kode_user']; ?>" class="btn btn-info">Tambah Ke Target Verifikasi</a>
+                            </td>
+                        </tr>
+
+                        <?php
+                        endforeach;
+                        
+                        
+                        ?>
+                    
+                    </tbody>
+                </table>
+                <?php 
+                }  ?>
+            </div>
+                </div>
+               
+    </div>
+    <div class="box box-primary">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">Target Verifikasi Usaha</h3>
+
+                </div>
+
+                
+            <div class="box-body">
+                <?php if (substr($_SESSION['nama_lengkap'], 0, 2)) { 
+                ?> 
+                <table id="dtHorizontalExample2" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                                <th>No. </th>
+                                <th>Target Desa</th>
+                                <th>Kecamatan</th>
+                                <th>Kabupaten</th>
+                                <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($data_target_verifikasi as $row) :
+                        ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $row->desa; ?></td>
+                            <td><?= $row->kecamatan; ?></td>
+                            <td><?= $row->kabupaten; ?></td>
+                            <td>
+                                <a href="<?= base_url('admin/user/hapus_data_target/').$row->desa."/".$data_profil['kode_user']; ?>" class="btn btn-danger">Hapus dari Target Verifikasi</a>
+                            </td>
+                        </tr>
+
+                        <?php
+                        endforeach;
+                        
+                        
+                        ?>
+                    
+                    </tbody>
+                </table>
+                <?php 
+                }  ?>
+            </div>
+               
+    </div>
+        
+
+        <!-- /.tab-pane -->
+
+    <!-- /.nav-tabs-custom -->
+  </div>
+  
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+</section>
+    <!-- /.content -->
+</div>
+    <!-- /.content-wrapper -->
+    <?php $this->load->view('admin/parsial/v_footer')?>
+
+
+
+  <!-- AdminLTE App -->
+  <script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
+  
+  <!-- FastClick -->
+  <script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
+  <!-- AdminLTE App -->
+  <script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+    $('#dtHorizontalExample tfoot th').each( function () {
+		var title = $(this).text();
+		$(this).html( '<input type="text" placeholder="'+title+' Search" />' );
+	} );
+
+  $('#dtHorizontalExample').DataTable({
+    
+    dom: 'Bfrtip',
+    buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                  columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+                    
+                },
+                filename: function(){
+                  
+                var today = new Date();
+                var dd = today.getDate();
+
+                var mm = today.getMonth()+1; 
+                var yyyy = today.getFullYear();
+                if(dd<10) 
+                {
+                    dd='0'+dd;
+                } 
+
+                if(mm<10) 
+                {
+                    mm='0'+mm;
+                } 
+                today = dd+'-'+mm+'-'+yyyy;
+
+                return 'Daftar_Usaha_Komoditas_'+' <?= urldecode($komoditas); ?>' + '_' + today;
+              },
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+                },
+                filename: function(){
+                  
+                var today = new Date();
+                var dd = today.getDate();
+
+                var mm = today.getMonth()+1; 
+                var yyyy = today.getFullYear();
+                if(dd<10) 
+                {
+                    dd='0'+dd;
+                } 
+
+                if(mm<10) 
+                {
+                    mm='0'+mm;
+                } 
+                today = dd+'-'+mm+'-'+yyyy;
+
+                return 'Daftar_Usaha_Komoditas_'+' <?= ($komoditas); ?>' + '_' + today;
+              },
+            },
+            'colvis'
+        ],
+  "scrollX": true,
+  "deferRender": true,
+  "responsive": true,
+   
+  
+  });
+  
+  
+  $('.dataTables_length').addClass('bs-select');
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    $('#dtHorizontalExample2 tfoot th').each( function () {
+		var title = $(this).text();
+		$(this).html( '<input type="text" placeholder="'+title+' Search" />' );
+	} );
+
+  $('#dtHorizontalExample2').DataTable({
+    
+    dom: 'Bfrtip',
+    buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                  columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+                    
+                },
+                filename: function(){
+                  
+                var today = new Date();
+                var dd = today.getDate();
+
+                var mm = today.getMonth()+1; 
+                var yyyy = today.getFullYear();
+                if(dd<10) 
+                {
+                    dd='0'+dd;
+                } 
+
+                if(mm<10) 
+                {
+                    mm='0'+mm;
+                } 
+                today = dd+'-'+mm+'-'+yyyy;
+
+                return 'Daftar_Usaha_Komoditas_'+' <?= urldecode($komoditas); ?>' + '_' + today;
+              },
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+                },
+                filename: function(){
+                  
+                var today = new Date();
+                var dd = today.getDate();
+
+                var mm = today.getMonth()+1; 
+                var yyyy = today.getFullYear();
+                if(dd<10) 
+                {
+                    dd='0'+dd;
+                } 
+
+                if(mm<10) 
+                {
+                    mm='0'+mm;
+                } 
+                today = dd+'-'+mm+'-'+yyyy;
+
+                return 'Daftar_Usaha_Komoditas_'+' <?= ($komoditas); ?>' + '_' + today;
+              },
+            },
+            'colvis'
+        ],
+  "scrollX": true,
+  "deferRender": true,
+  "responsive": true,
+   
+  
+  });
+  
+  
+  $('.dataTables_length').addClass('bs-select');
+  });
+</script>
+
+
+
+
