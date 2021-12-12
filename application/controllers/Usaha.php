@@ -8,8 +8,7 @@ class Usaha extends CI_Controller{
  
 	function index(){ 
 		$x['data']=$this->m_usaha->get_all();  
-		$x['data_kabupaten']=$this->m_usaha->get_all();  
-		$x['data_grafik']=$this->m_usaha->get_all_perkabupaten("SEMUA")->result();  
+		$x['data_grafik']=$this->m_usaha->get_data_grafik_pertumbuhan_data_perbulan()->result();   
 		
 		$x['semua']=$this->m_usaha->get_total()->row_array();
 		$x['nasional'] = $this->m_usaha->get_all_perskala_pasar("Nasional")->row_array(); 

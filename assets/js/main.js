@@ -1,80 +1,124 @@
-$(function(){
-	$("#wizard").steps({
-        headerTag: "h4",
-        bodyTag: "section",
-        transitionEffect: "fade",
-        enableAllSteps: true,
-        transitionEffectSpeed: 300,
-        labels: {
-            next: "Continue",
-            previous: "Back",
-            finish: 'Proceed to checkout'
-        },
-        onStepChanging: function (event, currentIndex, newIndex) { 
-            if ( newIndex >= 1 ) {
-                $('.steps ul li:first-child a img').attr('src','images/step-1.png');
-            } else {
-                $('.steps ul li:first-child a img').attr('src','images/step-1-active.png');
-            }
+/**
+* Template Name: SoftLand - v4.7.0
+* Template URL: https://bootstrapmade.com/softland-bootstrap-app-landing-page-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+(function() {
+  "use strict";
 
-            if ( newIndex === 1 ) {
-                $('.steps ul li:nth-child(2) a img').attr('src','images/step-2-active.png');
-            } else {
-                $('.steps ul li:nth-child(2) a img').attr('src','images/step-2.png');
-            }
+  /**
+   * Easy selector helper function
+   */
+  const select = (el, all = false) => {
+    el = el.trim()
+    if (all) {
+      return [...document.querySelectorAll(el)]
+    } else {
+      return document.querySelector(el)
+    }
+  }
 
-            if ( newIndex === 2 ) {
-                $('.steps ul li:nth-child(3) a img').attr('src','images/step-3-active.png');
-            } else {
-                $('.steps ul li:nth-child(3) a img').attr('src','images/step-3.png');
-            }
+  /**
+   * Easy event listener function
+   */
+  const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all)
+    if (selectEl) {
+      if (all) {
+        selectEl.forEach(e => e.addEventListener(type, listener))
+      } else {
+        selectEl.addEventListener(type, listener)
+      }
+    }
+  }
 
-            if ( newIndex === 3 ) {
-                $('.steps ul li:nth-child(4) a img').attr('src','images/step-4-active.png');
-                $('.actions ul').addClass('step-4');
-            } else {
-                $('.steps ul li:nth-child(4) a img').attr('src','images/step-4.png');
-                $('.actions ul').removeClass('step-4');
-            }
-            return true; 
-        }
-    });
-    // Custom Button Jquery Steps
-    $('.forward').click(function(){
-    	$("#wizard").steps('next');
+  /**
+   * Easy on scroll event listener 
+   */
+  const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener)
+  }
+
+  /**
+   * Toggle .header-scrolled class to #header when page is scrolled
+   */
+  let selectHeader = select('#header')
+  if (selectHeader) {
+    const headerScrolled = () => {
+      if (window.scrollY > 100) {
+        selectHeader.classList.add('header-scrolled')
+      } else {
+        selectHeader.classList.remove('header-scrolled')
+      }
+    }
+    window.addEventListener('load', headerScrolled)
+    onscroll(document, headerScrolled)
+  }
+
+  /**
+   * Mobile nav toggle
+   */
+  on('click', '.mobile-nav-toggle', function(e) {
+    select('#navbar').classList.toggle('navbar-mobile')
+    this.classList.toggle('bi-list')
+    this.classList.toggle('bi-x')
+  })
+
+  /**
+   * Back to top button
+   */
+  let backtotop = select('.back-to-top')
+  if (backtotop) {
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active')
+      } else {
+        backtotop.classList.remove('active')
+      }
+    }
+    window.addEventListener('load', toggleBacktotop)
+    onscroll(document, toggleBacktotop)
+  }
+
+  /**
+   * Mobile nav dropdowns activate
+   */
+  on('click', '.navbar .dropdown > a', function(e) {
+    if (select('#navbar').classList.contains('navbar-mobile')) {
+      e.preventDefault()
+      this.nextElementSibling.classList.toggle('dropdown-active')
+    }
+  }, true)
+
+  /**
+   * Testimonials slider
+   */
+  new Swiper('.testimonials-slider', {
+    speed: 600,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    slidesPerView: 'auto',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
+  });
+
+  /**
+   * Animation on scroll
+   */
+  window.addEventListener('load', () => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
     })
-    $('.backward').click(function(){
-        $("#wizard").steps('previous');
-    })
-    // Click to see password 
-    $('.password i').click(function(){
-        if ( $('.password input').attr('type') === 'password' ) {
-            $(this).next().attr('type', 'text');
-        } else {
-            $('.password input').attr('type', 'password');
-        }
-    }) 
-    // Create Steps Image
-    $('.steps ul li:first-child').append('<img src="images/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="images/step-1-active.png" alt=""> ').append('<span class="step-order">Step 01</span>');
-    $('.steps ul li:nth-child(2').append('<img src="images/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="images/step-2.png" alt="">').append('<span class="step-order">Step 02</span>');
-    $('.steps ul li:nth-child(3)').append('<img src="images/step-arrow.png" alt="" class="step-arrow">').find('a').append('<img src="images/step-3.png" alt="">').append('<span class="step-order">Step 03</span>');
-    $('.steps ul li:last-child a').append('<img src="images/step-4.png" alt="">').append('<span class="step-order">Step 04</span>');
-    // Count input 
-    $(".quantity span").on("click", function() {
+  });
 
-        var $button = $(this);
-        var oldValue = $button.parent().find("input").val();
-
-        if ($button.hasClass('plus')) {
-          var newVal = parseFloat(oldValue) + 1;
-        } else {
-           // Don't allow decrementing below zero
-          if (oldValue > 0) {
-            var newVal = parseFloat(oldValue) - 1;
-            } else {
-            newVal = 0;
-          }
-        }
-        $button.parent().find("input").val(newVal);
-    });
-})
+})()

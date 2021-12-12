@@ -12,7 +12,7 @@ class Dashboard extends CI_Controller{
 	}
 
 	function index(){
-		$x['visitor'] = $this->m_pengunjung->statistik_pengujung(); 
+		$x['visitor'] = $this->m_pengunjung->statistik_pengujung();  
 		$wilayah = $this->session->userdata('wilayah');
 		$kabupaten = $this->session->userdata('kabupaten');
 		$nama = $this->session->userdata('nama_lengkap'); 
@@ -40,6 +40,7 @@ class Dashboard extends CI_Controller{
 
 			
 			$x['data_kabupaten']=$this->m_usaha->get_all_perkabupaten("SEMUA")->result(); 
+			$x['data_level_usaha']=$this->m_usaha->get_data_level_usaha("SEMUA")->result();  
 			//$x['total_perkabupaten']=$this->m_usaha->get_total_perkabupaten($kabupaten)->row_array();   
  
 			$x['ntb'] = $this->m_usaha->get_total()->row_array();
@@ -66,7 +67,7 @@ class Dashboard extends CI_Controller{
 	//SELECT BERTINGKAT 
 	function get_data_kecamatan_perkabupaten()
     {
-        $kabupaten=$this->input->post('kabupaten');
+        $kabupaten=$this->input->post('kabupaten'); 
         $data=$this->m_usaha->get_data_kecamatan_perkabupaten($kabupaten)->result(); 
         echo json_encode($data);
     }
@@ -114,6 +115,7 @@ class Dashboard extends CI_Controller{
         $desa=$this->input->post('desa');
         $komoditas=$this->input->post('komoditas');
         $metode_pemasaran=$this->input->post('metode_pemasaran');
+        $ket=$this->input->post('level_usaha');
 
 		
 		$x['visitor'] = $this->m_pengunjung->statistik_pengujung(); 
@@ -131,15 +133,18 @@ class Dashboard extends CI_Controller{
 			$x['total_semua']=$this->m_usaha->get_total()->row_array();  
 
 			$x['data_kabupaten']=$this->m_usaha->get_all_perkabupaten("SEMUA")->result(); 
+			$x['data_level_usaha']=$this->m_usaha->get_data_level_usaha("SEMUA")->result(); 
 			//$x['total_perkabupaten']=$this->m_usaha->get_total_perkabupaten($kabupaten)->row_array();   
 			
-			$x['data']=$this->m_usaha->get_all_bertingkat($kabupaten, $kecamatan, $desa, $komoditas, $metode_pemasaran);  
+			$x['data']=$this->m_usaha->get_all_bertingkat($kabupaten, $kecamatan, $desa, $komoditas, $metode_pemasaran, $ket)->result();  
+			$x['jml_data']=$this->m_usaha->get_all_bertingkat($kabupaten, $kecamatan, $desa, $komoditas, $metode_pemasaran, $ket)->num_rows();  
 
 			$x['var_kabupaten'] = $kabupaten;
 			$x['var_kecamatan'] = $kecamatan;
 			$x['var_desa'] = $desa;
 			$x['var_komoditas'] = $komoditas;
 			$x['var_metode_pemasaran'] = $metode_pemasaran; 
+			$x['var_level_usaha'] = $ket; 
 
 			$x['ntb'] = $this->m_usaha->get_total()->row_array();
 			$x['lotim'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Lombok Timur")->row_array();
@@ -167,7 +172,7 @@ class Dashboard extends CI_Controller{
 		//$wilayah = $this->session->userdata('wilayah');
 		$nama = $this->session->userdata('nama_lengkap'); 
 		if($this->session->userdata('akses')=='1'){
-			$x['visitor'] = $this->m_pengunjung->statistik_pengujung();
+			$x['visitor'] = $this->m_pengunjung->statistik_pengujung(); 
 
 			$x['total']=$this->m_usaha->get_total()->row_array();   
 			$x['total_semua']=$this->m_usaha->get_total()->row_array();   

@@ -26,3 +26,15 @@ function last_updated() {
      return null;
 
 }
+
+
+function get_bulan($no)
+{
+	$no = (INT) $no;
+	
+	$BulanIndo = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+ 
+ 
+	$result = $BulanIndo[$no];		
+	return($result);
+}

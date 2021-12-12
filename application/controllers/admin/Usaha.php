@@ -371,6 +371,8 @@ class Usaha extends CI_Controller{
 		$kode_pos=$this->input->post('kode_pos');
 		$kecamatan=$this->input->post('kecamatan');
 		$kabupaten=$this->input->post('kabupaten');
+		$latitude=$this->input->post('latitude');
+		$longitude=$this->input->post('longitude');
 
 		$komoditas=$this->input->post('komoditas');
 		$merk_produk=$this->input->post('merk_produk');
@@ -423,6 +425,9 @@ class Usaha extends CI_Controller{
 			'kode_pos'=>$kode_pos,
 			'kecamatan'=>$kecamatan,
 			'kabupaten'=> $kabupaten,
+			
+			'lat'=> $latitude,
+			'lng'=> $longitude,
 			
 			'alamat_pemilik'=>$alamat_pemilik,
 			'jalan_pemilik'=>$jalan_pemilik,
@@ -483,6 +488,8 @@ function update_data(){
 		$kode_pos=$this->input->post('kode_pos');
 		$kecamatan=$this->input->post('kecamatan');
 		$kabupaten=$this->input->post('kabupaten');
+		$latitude=$this->input->post('latitude');
+		$longitude=$this->input->post('longitude');
 
 		$komoditas=$this->input->post('komoditas');
 		$merk_produk=$this->input->post('merk_produk');
@@ -535,6 +542,9 @@ function update_data(){
 			'kode_pos'=>$kode_pos,
 			'kecamatan'=>$kecamatan,
 			'kabupaten'=> $kabupaten,
+			
+			'lat'=> $latitude,
+			'lng'=> $longitude,
 			
 			'alamat_pemilik'=>$alamat_pemilik,
 			'jalan_pemilik'=>$jalan_pemilik,
@@ -609,20 +619,22 @@ public function import_excel(){
 						'desa'=>$rowData[$i][9],
 						'kecamatan'=>$rowData[$i][10],
 						'kabupaten'=> $rowData[$i][11],
-						'komoditas'=>$rowData[$i][12],
-						'jml_karyawan'=>$rowData[$i][13],
-						'kapasitas_produksi'=>$rowData[$i][14],
-						'satuan_produksi'=>$rowData[$i][15],
-						'periode_produksi'=>$rowData[$i][16],
-						'status_kepemilikan'=>$rowData[$i][17],
-						'status_kepemilikan_tempat'=>$rowData[$i][18],
-						'metode_pemasaran'=>$rowData[$i][19],
-						'sumber_modal'=>$rowData[$i][20],
-						'skala_pasar'=>$rowData[$i][21],
-						'luas_lahan'=>$rowData[$i][22],
-						'telpon'=>$rowData[$i][23],
-						'email'=>$rowData[$i][24],
-						'website'=>$rowData[$i][25],
+						'lat'=> $rowData[$i][12],
+						'lng'=> $rowData[$i][13],
+						'komoditas'=>$rowData[$i][14],
+						'jml_karyawan'=>$rowData[$i][15],
+						'kapasitas_produksi'=>$rowData[$i][16],
+						'satuan_produksi'=>$rowData[$i][17],
+						'periode_produksi'=>$rowData[$i][18],
+						'status_kepemilikan'=>$rowData[$i][19],
+						'status_kepemilikan_tempat'=>$rowData[$i][20],
+						'metode_pemasaran'=>$rowData[$i][21],
+						'sumber_modal'=>$rowData[$i][22],
+						'skala_pasar'=>$rowData[$i][23],
+						'luas_lahan'=>$rowData[$i][24],
+						'telpon'=>$rowData[$i][25],
+						'email'=>$rowData[$i][26],
+						'website'=>$rowData[$i][27],
 						'id_user'=>$_SESSION['idadmin']
 				    	);
 						$this->m_usaha->insert($data);
@@ -740,6 +752,8 @@ public function import_update_excel(){
 				$modal_luar=$this->input->post('modal_luar');
 				$nilai_aset=$this->input->post('nilai_aset');
 				$nilai_omzet=$this->input->post('nilai_omzet');
+				$volume=$this->input->post('volume');
+				$shu=$this->input->post('shu');
 		
 				$data=array(
 					'id_usaha'=>$id_usaha,
@@ -747,7 +761,9 @@ public function import_update_excel(){
 					'nilai_modal_sendiri'=>$modal_sendiri,
 					'nilai_modal_luar'=>$modal_luar,
 					'nilai_aset'=>$nilai_aset,
-					'nilai_omzet'=>$nilai_omzet
+					'nilai_omzet'=>$nilai_omzet,
+					'volume'=>$volume,
+					'shu'=>$shu
 				);
 		
 			$this->m_indikator_usaha->insert($data);
@@ -823,6 +839,7 @@ public function import_update_excel(){
 		$manajer_perempuan=$this->input->post('manajer_perempuan'); 
 		$karyawan_laki_laki=$this->input->post('karyawan_laki_laki');
 		$karyawan_perempuan=$this->input->post('karyawan_perempuan');
+		$status=$this->input->post('status');
 
 		$data=array( 
 			'id_usaha'=>$id_usaha,
@@ -839,7 +856,8 @@ public function import_update_excel(){
 			'manajer_laki_laki'=>$manajer_laki_laki,
 			'manajer_perempuan'=>$manajer_perempuan,
 			'karyawan_laki_laki'=>$karyawan_laki_laki,
-			'karyawan_perempuan'=>$karyawan_perempuan
+			'karyawan_perempuan'=>$karyawan_perempuan,
+			'status'=>$status
 		);
 
 	$this->m_tenaga_kerja->insert($data);

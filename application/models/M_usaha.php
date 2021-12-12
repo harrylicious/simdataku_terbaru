@@ -25,6 +25,9 @@ class M_usaha extends CI_Model{
     public $view_sebaran_desa ="data_sebaran_desa";
     public $view_sebaran_usaha_lengkap_terverifikasi = "daftar_sebaran_usaha_lengkap_terverifikasi";
     public $view_sebaran_usaha_lengkap_belum_verifikasi = "daftar_sebaran_usaha_lengkap_belum_verifikasi";
+
+
+    public $view_data_usaha_perbulan = "data_usaha_perbulan";
     
 
     public $view_total_luas_lahan_semua_komoditas ="data_usaha_total_luas_lahan_semua_komoditas";
@@ -64,10 +67,25 @@ class M_usaha extends CI_Model{
 
     }
 
-     // get all
-     function get_all_bertingkat($kabupaten, $kecamatan, $desa, $komoditas, $metode_pemasaran){
+    // get all
+    function get_total_data(){
+        $this->db->order_by($this->id,$this->order);
+        return $this->db->get($this->tabel); 
 
-         if ($metode_pemasaran == "" && $komoditas == "" && $desa == "" && $kecamatan == "") {
+    }
+
+
+     // get all
+     function get_all_bertingkat($kabupaten, $kecamatan, $desa, $komoditas, $metode_pemasaran, $ket){
+
+         if ($metode_pemasaran == "" && $komoditas == "" && $desa == "" && $kecamatan == "" && $kabupaten == "") {
+            $this->db->where("ket", urldecode($ket));
+            //$this->db->or_where("level_usaha", urldecode($level_usaha));
+            $this->tabel = "data_usaha_berd_level";
+
+         }
+
+         else if ($metode_pemasaran == "" && $komoditas == "" && $desa == "" && $kecamatan == "") {
             $this->db->where("kabupaten", urldecode($kabupaten));
             //$this->db->or_where("level_usaha", urldecode($level_usaha));
 
@@ -82,6 +100,13 @@ class M_usaha extends CI_Model{
 
          else if ($metode_pemasaran == "" && $komoditas == "" && $desa == "") {
             $this->db->where("kecamatan", urldecode($kecamatan));
+            $this->db->where("kabupaten", urldecode($kabupaten));
+            //$this->db->or_where("level_usaha", urldecode($level_usaha));
+
+         }
+
+         else if ($metode_pemasaran == "" && $komoditas == "" && $kecamatan == "") {
+            $this->db->where("desa", urldecode($desa));
             $this->db->where("kabupaten", urldecode($kabupaten));
             //$this->db->or_where("level_usaha", urldecode($level_usaha));
 
@@ -176,7 +201,7 @@ class M_usaha extends CI_Model{
 
 
         $this->db->order_by($this->id,$this->order);
-        return $this->db->get($this->tabel)->result(); 
+        return $this->db->get($this->tabel); 
 
     }
 
@@ -220,15 +245,18 @@ class M_usaha extends CI_Model{
     }
     
     
-    
     // get all
-    function get_all_perkabupaten($wilayah){ 
+    function get_all_perkabupaten($wilayah){  
         if ($wilayah != "SEMUA") { 
             $this->db->where($this->wilayah, urldecode($wilayah));
         }
         return $this->db->get($this->view_perkabupaten);  
 
     }
+
+
+
+    
 
     // get all
     function get_all_perkomoditas($komoditas){
@@ -240,8 +268,8 @@ class M_usaha extends CI_Model{
     }
 
     // get all
-    function get_all_data_perkomoditas($komoditas){
-        return $this->db->query("select COUNT(*) as total from total_data_komoditas");
+    function get_all_data_perkomoditas($komoditas){  
+        return $this->db->query("select *from total_data_komoditas");
 
     }
 
@@ -392,8 +420,8 @@ class M_usaha extends CI_Model{
     }
 
     // get all
-    function get_data_kecamatan_perkabupaten($kabupaten){ 
-        if ($wilayah == "SEMUA") { 
+    function get_data_kecamatan_perkabupaten($kabupaten){  
+        if ($kabupaten == "SEMUA") { 
             return $this->db->query("select kecamatan, count(*) as total from usaha group by kecamatan"); 
         }
         else {
@@ -405,7 +433,7 @@ class M_usaha extends CI_Model{
     
     // get all
     function get_data_desa_perkecamatan($kecamatan){ 
-        if ($wilayah == "SEMUA") { 
+        if ($kecamatan == "SEMUA") { 
             return $this->db->query("select desa, count(*) as total from usaha group by desa"); 
         }
         else {
@@ -416,7 +444,7 @@ class M_usaha extends CI_Model{
 
     // get all
     function get_data_desa_perkabupaten($kabupaten){ 
-        if ($wilayah == "SEMUA") { 
+        if ($kabupaten == "SEMUA") { 
             return $this->db->query("select desa, count(*) as total from usaha group by desa"); 
         }
         else {
@@ -428,7 +456,7 @@ class M_usaha extends CI_Model{
 
     // get all
     function get_data_komoditas_perdesa($desa){ 
-        if ($wilayah == "SEMUA") { 
+        if ($desa == "SEMUA") { 
             return $this->db->query("select komoditas, count(*) as total from usaha group by komoditas"); 
         }
         else {
@@ -439,7 +467,7 @@ class M_usaha extends CI_Model{
 
       // get all
       function get_data_komoditas_perkecamatan($kecamatan){ 
-        if ($wilayah == "SEMUA") { 
+        if ($kecamatan == "SEMUA") { 
             return $this->db->query("select komoditas, count(*) as total from usaha group by komoditas"); 
         }
         else {
@@ -449,12 +477,23 @@ class M_usaha extends CI_Model{
     }
 
       // get all
-      function get_data_komoditas_kabupaten($kabupaten){ 
-        if ($wilayah == "SEMUA") { 
+    function get_data_komoditas_kabupaten($kabupaten){ 
+        if ($kabupaten == "SEMUA") { 
             return $this->db->query("select komoditas, count(*) as total from usaha group by komoditas"); 
         }
         else {
             return $this->db->query("select komoditas, count(*) as total from usaha where kabupaten = '".urldecode($kabupaten)."' group by komoditas"); 
+        }
+
+    }
+
+    // get all
+    function get_data_level_usaha($keterangan){  
+        if ($keterangan == "SEMUA") { 
+            return $this->db->query("select ket, count(*) as total from data_usaha_berd_level group by ket"); 
+        }
+        else {
+            return $this->db->query("select ket, count(*) as total from data_usaha_berd_level where ket = '".urldecode($keterangan)."' group by ket"); 
         }
 
     }
@@ -679,6 +718,13 @@ class M_usaha extends CI_Model{
     function get_perstatus($status){
         $this->db->where("is_activated", $status);
         return $this->db->get("jml_data_perstatus"); 
+    }
+
+
+    // DATA GRAFIK
+    function get_data_grafik_pertumbuhan_data_perbulan(){  
+        return $this->db->get($this->view_data_usaha_perbulan);  
+
     }
  
 

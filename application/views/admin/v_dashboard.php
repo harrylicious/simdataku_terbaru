@@ -37,7 +37,7 @@ tfoot input {
                 <div class="row">  
              
 
-                <div class="col-md-12"> 
+                    <div class="col-md-12"> 
                         <div class="box box-info">
                             <div class="box-header with-border">
                             <?php 
@@ -70,7 +70,7 @@ tfoot input {
                                                                     $no = 1;
                                                                     foreach ($data_kabupaten as $row) : 
                                                                     ?>
-                                                                        <option value="<?= $row->kabupaten; ?>"><?= $row->kabupaten; ?></option>
+                                                                        <option value="<?= $row->kabupaten; ?>"><?= $row->kabupaten." [Total: ".$row->total."]"; ?></option>
                                                                     <?php
                                                                     endforeach;
                                                                     ?>
@@ -117,13 +117,30 @@ tfoot input {
 
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
-                                                        <label>Aksi</label> </br>
+                                                        <label>Pilih Level Usaha</label>
+                                                            <select class="form-control" name="level_usaha" id="level_usaha">
+                                                                <option value="<?= $var_level_usaha; ?>" selected><?= $var_level_usaha; ?></option>
+                                                                    <?php
+                                                                        $no = 1;
+                                                                        foreach ($data_level_usaha as $row) :  
+                                                                        ?>
+                                                                            <option value="<?= $row->ket; ?>"><?= $row->ket." [Total: ".$row->total."]"; ?></option>
+                                                                        <?php
+                                                                        endforeach;
+                                                                    ?>
+                                                            </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
                                                         <button type="submit" class="btn btn-success">CARI DATA</button>
                                                         <button type="reset" class="btn btn-danger">RESET PENCARIAN</button>
                                                     </div>
                                                 </div>
                                                 
                             </div>
+                                <div class="panel panel-default label-default"><h4><strong>Total Data: <?= $jml_data; ?></strong></h4> </div>
                  
 
 
@@ -140,14 +157,17 @@ tfoot input {
                             <div class="box-header with-border">
                             <?php 
                                 $teks = "Data Usaha Berdasarkan Komoditas";
-                                if ($_SESSION['level'] == "superadmin") {
-                                  $teks = "Daftar Semua Usaha <b>".$_SESSION['alamat']."</b>";
+                                if (!$var_kabupaten == "") {
+                                  $teks = "Daftar Semua Usaha <b>".$var_kabupaten."</b>";
                                 }
-                                else if ($_SESSION['level'] == "admin") {
-                                  $teks = "Daftar Usaha Terentri di <b>".$_SESSION['nama_lengkap']."</b>";
+                                else if (!$var_kecamatan == "") {
+                                    $teks = "Daftar Semua Usaha <b>".$var_kecamatan.",".$var_kabupaten."</b>";
+                                }
+                                else if (!$var_desa == "") {
+                                    $teks = "Daftar Semua Usaha <b>".$var_desa.",".$var_kecamatan.",".$var_kabupaten."</b>";
                                 }
                                 else {
-                                  $teks = "Daftar Semua Usaha Kecamatan <b>".$_SESSION['kecamatan']."</b>";
+                                  $teks = "Daftar Semua Usaha Level <b>".$var_level_usaha."</b>";
                                 }
 
                                 ?> 
@@ -207,6 +227,7 @@ tfoot input {
                                                         <th>Kecamatan</th>
                                                         <th>Kabupaten</th>
                                                         <th>Metode Pemasaran</th>
+                                                        <th>Level</th>
                                                       <th width="160px">Aksi</th>
                                                   </tr>
                                               </thead>
@@ -230,6 +251,7 @@ tfoot input {
                                                       <td><?= $row->kecamatan; ?></td>
                                                       <td><?= $row->kabupaten; ?></td>
                                                       <td><?= $row->metode_pemasaran; ?></td>
+                                                      <td><?= $row->ket; ?></td>
                                                       <td>
                                                         <?php if ($_SESSION['level'] == "relawan") { ?>
                                                           <a href="<?= base_url('admin/usaha/edit/').$row->id; ?>" class="btn btn-warning">Edit</a>
@@ -293,7 +315,7 @@ tfoot input {
                     var i;
 
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].komoditas+'>'+data[i].komoditas+'</option>';
+                        html += '<option value='+data[i].komoditas+'>'+data[i].komoditas+' [Total: '+data[i].total+']'+'</option>';
                     }
                     html += '<option value="" selected>-</option>';
                     $('#komoditas').html(html);
@@ -313,7 +335,7 @@ tfoot input {
                     var i;
 
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].kecamatan+'>'+data[i].kecamatan+'</option>';
+                        html += '<option value='+data[i].kecamatan+'>'+data[i].kecamatan+' [Total: '+data[i].total+']'+'</option>';
                     }
                     html += '<option value="" selected>-</option>';
                     $('#kecamatan').html(html);
@@ -333,7 +355,7 @@ tfoot input {
                     var i;
 
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].desa+'>'+data[i].desa+'</option>';
+                        html += '<option value='+data[i].desa+'>'+data[i].desa+' [Total: '+data[i].total+']'+'</option>';
                     }
                     html += '<option value="" selected>-</option>';
                     $('#desa').html(html);
@@ -360,7 +382,7 @@ tfoot input {
                     var i;
 
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].komoditas+'>'+data[i].komoditas+'</option>';
+                        html += '<option value='+data[i].komoditas+'>'+data[i].komoditas+' [Total: '+data[i].total+']'+'</option>';
                     }
                     html += '<option value="" selected>-</option>';
                     $('#komoditas').html(html);
@@ -380,7 +402,7 @@ tfoot input {
                     var i;
 
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].desa+'>'+data[i].desa+'</option>';
+                        html += '<option value='+data[i].desa+'>'+data[i].desa+' [Total: '+data[i].total+']'+'</option>';
                     }
                     html += '<option value="" selected>-</option>';
                     $('#desa').html(html);
@@ -406,7 +428,7 @@ tfoot input {
                     var i;
 
                     for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].komoditas+'>'+data[i].komoditas+'</option>';
+                        html += '<option value='+data[i].komoditas+'>'+data[i].komoditas+' [Total: '+data[i].total+']'+'</option>';
                     }
                     html += '<option value="" selected>-</option>';
                     $('#komoditas').html(html);

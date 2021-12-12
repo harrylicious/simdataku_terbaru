@@ -4,9 +4,9 @@
     <!-- Logo -->
     <a href="<?php echo base_url('admin/dashboard'); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">SIMPUL - Dinas Perdagangan Provinsi NTB</span>
+      <span class="logo-mini">SIMDATAKU - Dinas Koperasi Provinsi NTB</span>
       <!-- logo for regular state and mobile devices -->
-      SIMPUL-NTB
+      SIMDATAKU
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->

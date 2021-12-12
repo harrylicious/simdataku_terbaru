@@ -9,10 +9,15 @@ class Datausaha extends CI_Controller{
 	}
 	function index(){ 
 		$x['data']=$this->m_usaha->get_all_perkabupaten("SEMUA")->result(); 
+		$x['data_grafik_kelas_usaha']=$this->m_usaha->get_data_level_usaha("SEMUA")->result();
+		$x['data_grafik_komoditas'] = $this->m_usaha->get_all_data_perkomoditas("SEMUA")->result();  
 
+		$x['total_data_grafik']=$this->m_usaha->get_data_level_usaha("SEMUA")->num_rows();
+		$x['total_semua_data']=$this->m_usaha->get_total_data()->num_rows(); 
+
+		
 		$x['semua']=$this->m_usaha->get_total()->row_array();
 		$x['nasional'] = $this->m_usaha->get_all_perskala_pasar("Nasional")->row_array(); 
-		$x['komoditas'] = $this->m_usaha->get_all_data_perkomoditas("")->row_array(); 
 		$x['regional'] = $this->m_usaha->get_all_perdesa_terdaftar()->row_array(); 
 		$x['online'] = $this->m_usaha->get_all_permetode_pemasaran("ONLINE")->row_array(); 
 		$x['offline'] = $this->m_usaha->get_all_permetode_pemasaran("OFFLINE")->row_array(); 

@@ -1,95 +1,102 @@
-<!DOCTYPE html>
-<html lang="id">
 
 <head>
-    <!-- Required meta tags --> 
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>SIMPUL - Dinas Perdagangan Provinsi NTB</title>
-    <link rel="shorcut icon" href="<?php echo base_url() . 'assets/images/favicon.png' ?>">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'theme/css/bootstrap.min.css' ?>">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'theme/css/font-awesome.min.css' ?>">
-    
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/dist/css/AdminLTE.min.css' ?>">
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/plugins/daterangepicker/daterangepicker.css' ?>">
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/plugins/timepicker/bootstrap-timepicker.min.css' ?>">
-    <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/plugins/datepicker/datepicker3.css' ?>">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SIMDATAKU - Dinas Koperasi Provinsi NTB</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="<?php echo base_url() . 'assets/images/favicon.png' ?>" rel="icon">
+  <link href="<?php echo base_url() . 'assets/images/favicon.png' ?>" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="<?php echo site_url(''); ?>assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<?php echo site_url(''); ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo site_url(''); ?>assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<?php echo site_url(''); ?>assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<?php echo site_url(''); ?>assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.css'?>">
+  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.css'?>">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
+  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.css'?>">
+  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/timepicker/bootstrap-timepicker.min.css'?>">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datepicker/datepicker3.css'?>">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/dist/css/skins/_all-skins.min.css' ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugins/toast/jquery.toast.min.css' ?>" />
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets1/css/paper-dashboard.min.css?v=2.0.1' ?>">
+  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.css'?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.css'?>"/>
 
-    
-    <!-- BARUUUUUUUUUUUUUUUUUUU -->
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/stylefront.css' ?>">
-    <!-- Favicons -->
-    <link href="<?php echo base_url() . 'assets/images/favicon.png' ?>" rel="icon">
-    <link href="<?php echo base_url() . 'assets/img/apple-touch-icon.png' ?>" rel="apple-touch-icon">
+  <!-- Fonts and Icons -->
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?php echo base_url().'assets/css/carddaerah.css'?>">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="<?php echo base_url() . 'assets/vendor/icofont/icofont.min.css' ?>" rel="stylesheet">
-    <link href="<?php echo base_url() . 'assets/vendor/remixicon/remixicon.css' ?>" rel="stylesheet">
-    <link href="<?php echo base_url() . 'assets/vendor/boxicons/css/boxicons.min.css' ?>" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-
-    <?php
-    function limit_words($string, $word_limit)
-    {
-        $words = explode(" ", $string);
-        return implode(" ", array_splice($words, 0, $word_limit));
-    }
-    ?>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.1/css/buttons.dataTables.min.css">
 
 
 
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: SoftLand - v4.7.0
+  * Template URL: https://bootstrapmade.com/softland-bootstrap-app-landing-page-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center ">
- 
-        <a href="<?php echo site_url(''); ?>" class="logo mr-auto"><img src="<?php echo base_url() . 'assets/images/logo/logo_depan.png' ?>" alt="" class="img-fluid"></a>
+<body>
 
-        <nav class="nav-menu d-none d-lg-block ">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1><a href="<?php echo site_url(''); ?>"><img src="<?php echo base_url() . 'assets/images/diskop-logo-putih.png' ?>" alt="" class="img-fluid"></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="<?php echo site_url(''); ?>">Beranda</a></li>
+          <li><a href="<?php echo site_url('usaha'); ?>">Usaha</a></li>
+          <li><a href="<?php echo site_url('komoditas'); ?>">Komoditas</a></li>
+          <li><a href="<?php echo site_url('regional'); ?>">Regional</a></li>
+          <li class="dropdown"><a href="<?php echo site_url('datausaha'); ?>">Datasheet</a></i></a>
             <ul>
-                <li class="<?= $this->uri->segment(1) == '' ? 'active' : '' ?>"><a href="<?php echo site_url(''); ?>">Beranda</a></li>
-                <li class="<?= $this->uri->segment(1) == 'umkm' ? 'active' : '' ?>"><a href="<?php echo site_url('umkm'); ?>">Usaha</a></li>
-                <li class="<?= $this->uri->segment(1) == 'komoditas' ? 'active' : '' ?>"><a href="<?php echo site_url('komoditas'); ?>">Komoditas</a></li>
-                <li class="<?= $this->uri->segment(1) == 'koperasi' ? 'active' : '' ?>"><a href="<?php echo site_url('regional'); ?>">Regional</a></li>
-                <li class="nav-item <?= $this->uri->segment(1) == 'datasheet' ? 'active' : '' ?>"><a href="<?php echo site_url('datausaha'); ?>">Datasheet</a></li>
-                <?php
-                if($this->session->userdata('akses')=='1'){   ?>
-                        <a href="<?php echo site_url('admin/login/logout'); ?>" class="get-started-btn scrollto nav-item <?= $this->uri->segment(1) == 'administrator' ? 'active' : '' ?>">Logout</a>
-
-                <?php } 
-                else {
-                    ?>
-                    <a href="<?php echo site_url('administrator'); ?>" class="get-started-btn scrollto nav-item <?= $this->uri->segment(1) == 'administrator' ? 'active' : '' ?>">Login</a>
-                    <?php } ?>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
             </ul>
-        </nav><!-- .nav-menu -->
-
-
+          </li>
+          <li><a href="<?php echo site_url('administrator'); ?>" class="get-started-btn scrollto nav-item">Login</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
 
     </div>
-</header><!-- End Header -->
-
-
-<!-- Vendor JS Files -->
-<script src="<?php echo base_url() . 'assets/vendor/jquery/jquery.min.js' ?>"></script>
-
-<!-- Template Main JS File -->
-<script src="<?php echo base_url() . 'assets/js/mainfront.js' ?>"></script>
-<script src="<?php echo base_url() . 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' ?>"></script>
+  </header><!-- End Header -->

@@ -1,31 +1,88 @@
 
-<!--============================= HEADER =============================-->
-<?php include_once "parsial/header.php";
+
+<?php
+ 
+$limit = 50000;
+$y = 100;
+$dataPoints = array();
+
+$total_data = $total_semua_data - $total_data_grafik;
+
+foreach ($data_grafik_kelas_usaha as $data) {
+	array_push($dataPoints, array("label" => $data->ket, "y" => $data->total));
+}
+array_push($dataPoints, array("label" => "Belum terverifikasi", "y" => $total_data));
+
 ?>
-<!--//END HEADER -->
-<style>
-  tfoot input {
-    width: 100%;
-    padding: 3px;
-    box-sizing: border-box;
-  }
-</style>
 
-<!--//END HEADER -->
-<div class="p-5 mb-0" style="background: rgba(137, 3, 0, 0);"></div>
+<?php
+ 
+$dataPoints_komoditas = array();
 
-<div class="container">
-<?php include_once "parsial/summary_doc.php"; ?>
+foreach ($data_grafik_komoditas as $data) {
+	array_push($dataPoints_komoditas, array("label" => $data->komoditas, "y" => $data->total));
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<?php include_once "parsial/header.php"; ?>
+
+  <!-- ======= Hero Section ======= -->
+  <section class="hero-section" id="hero">
+
+    <div class="wave">
+
+      <svg width="100%" height="355px" viewBox="0 0 1920 355" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
+            <path d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,757 L1017.15166,757 L0,757 L0,439.134243 Z" id="Path"></path>
+          </g>
+        </g>
+      </svg>
+
+    </div>
+
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 hero-text-image">
+          <div class="row">
+            <div class="col-lg-8 text-center text-lg-start">
+              <h1 data-aos="fade-right">SIMDATAKU DISKOP</h1>
+              <p class="mb-5" data-aos="fade-right" data-aos-delay="100">Sistem Informasi Manajemen Data Terpadu</p>
+              <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="#" class="btn btn-outline-white">Get started</a></p>
+            </div>
+            <div class="col-lg-4 iphone-wrap">
+              <img src="<?php echo base_url(); ?>assets/img/phone_1.png" alt="Image" class="phone-1" data-aos="fade-right">
+              <img src="<?php echo base_url(); ?>assets/img/phone_2.png" alt="Image" class="phone-2" data-aos="fade-right" data-aos-delay="200">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Home Section ======= -->
+    <section class="section">
+      <div class="container">
+
   
         <div class="row">
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Grafik Kabupaten</h5>
+                <h5 class="card-title">Total Data Usaha Berdasarkan Kelas Usaha</h5>
                 <!-- <p class="card-category">Sebaran Data Per</p> -->
               </div>
-              <div class="card-body ">
-                <canvas id="myChart" width="400" height="100"></canvas>
+              <div class="card-body">
+                
+              <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+              <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
               </div>
               <div class="card-footer ">
                 <hr>
@@ -40,10 +97,11 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Grafik Komoditas</h5>
+                <h5 class="card-title">Total Data Usaha Berdasarkan Komoditas</h5>
               </div>
               <div class="card-body ">
-                <canvas id="chartJenisUsaha" width="400" height="100"></canvas>
+              <div id="chartContainer_komoditas" style="height: 370px; width: 100%;"></div>
+              <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
               </div>
               <div class="card-footer ">
                 <hr>
@@ -62,90 +120,44 @@
   
 
 </html>
-<?php foreach ($data as $key => $value) {
-  $kabupaten[] = $value->kabupaten;
-  $jumlah[] = $value->total;
-  
-}?>
-<script src="<?php echo base_url().'assets1/js/plugins/chartjs.min.js'?>"></script>
 <script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: <?=  json_encode($kabupaten)?>,
-        datasets: [{
-            label: 'Data Usaha Perkabupaten/Kota',
-            data: <?= json_encode($jumlah)?>,
-            backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 12, 255, 1)',
-                'rgba(123, 102, 255, 1)',
-                'rgba(183, 92, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 12, 255, 1)',
-                'rgba(123, 102, 255, 1)',
-                'rgba(183, 92, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
+window.onload = function() {
+ 
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Total Data Usaha Berdasarkan Kelas"
+	},
+	subtitles: [{
+		text: "Kelas: Mikro, Kecil, Menengah, Besar"
+	}],
+	data: [{
+		type: "pie",
+		yValueFormatString: "#,##0.00\"%\"",
+		indexLabel: "{label} ({y})",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
 });
+chart.render();
 
-var juChart = document.getElementById('chartJenisUsaha').getContext('2d');
-var myChart = new Chart(juChart, {
-    type: 'bar',
-    data: {
-        labels: <?=  json_encode($label_grafik_jenis_usaha)?>,
-        datasets: [{
-            label: 'Data Usaha Komoditas',
-            data: <?= json_encode($value_grafik_jenis_usaha)?>,
-            backgroundColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
+var chart = new CanvasJS.Chart("chartContainer_komoditas", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Total Data Usaha Berdasarkan Kelas"
+	},
+	axisY: {
+		title: "Data Perkomoditas"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## usaha",
+		dataPoints: <?php echo json_encode($dataPoints_komoditas, JSON_NUMERIC_CHECK); ?>
+	}]
 });
+chart.render();
+ 
+}
 </script>
+
