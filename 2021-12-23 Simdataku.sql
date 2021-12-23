@@ -304,6 +304,13 @@ REPLACE INTO `data_kawasan` (`id_kawasan`, `desa`, `kecamatan`, `kabupaten`) VAL
 	(255, 'Mandarin', 'Sambalia', 'Lombok Timur');
 /*!40000 ALTER TABLE `data_kawasan` ENABLE KEYS */;
 
+-- Dumping structure for view simdataku.data_koperasi_perkabupaten
+-- Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `data_koperasi_perkabupaten` (
+	`kabupaten` VARCHAR(100) NULL COLLATE 'utf8mb4_general_ci',
+	`total` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
 -- Dumping structure for table simdataku.data_pengunjung
 CREATE TABLE IF NOT EXISTS `data_pengunjung` (
   `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1943,9 +1950,9 @@ CREATE TABLE IF NOT EXISTS `detail_indikator_usaha` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table simdataku.detail_indikator_usaha: ~3 rows (approximately)
+-- Dumping data for table simdataku.detail_indikator_usaha: ~4 rows (approximately)
 /*!40000 ALTER TABLE `detail_indikator_usaha` DISABLE KEYS */;
 REPLACE INTO `detail_indikator_usaha` (`id`, `id_usaha`, `tahun`, `nilai_modal_sendiri`, `nilai_modal_luar`, `nilai_aset`, `nilai_omzet`, `volume`, `shu`, `created_at`, `updated_at`) VALUES
 	(8, 2209, 2019, '1000000000', '1000000000', '10000000000', '10000000000', '1000', '123', '2021-12-12 08:39:06', '2021-12-12 08:39:06'),
@@ -1953,10 +1960,85 @@ REPLACE INTO `detail_indikator_usaha` (`id`, `id_usaha`, `tahun`, `nilai_modal_s
 	(10, 2208, 2020, '100000000000', '100000000000', '1000000000000', '1000000000000', '10000000000', '10', '2021-12-12 08:40:18', '2021-12-12 08:40:18');
 /*!40000 ALTER TABLE `detail_indikator_usaha` ENABLE KEYS */;
 
+-- Dumping structure for table simdataku.detail_koperasi_anggota
+CREATE TABLE IF NOT EXISTS `detail_koperasi_anggota` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_koperasi` int(5) NOT NULL DEFAULT 0,
+  `tahun` int(4) DEFAULT NULL,
+  `anggota` int(5) DEFAULT NULL,
+  `lelaki` int(5) DEFAULT NULL,
+  `perempuan` int(5) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table simdataku.detail_koperasi_anggota: ~0 rows (approximately)
+/*!40000 ALTER TABLE `detail_koperasi_anggota` DISABLE KEYS */;
+REPLACE INTO `detail_koperasi_anggota` (`id`, `id_koperasi`, `tahun`, `anggota`, `lelaki`, `perempuan`, `created_at`, `updated_at`) VALUES
+	(2, 1, 2019, 10, 10, 10, '2021-12-21 12:45:53', '2021-12-21 12:45:53'),
+	(3, 13, 2019, 10, 11, 12, '2021-12-23 11:30:10', '2021-12-23 11:30:10');
+/*!40000 ALTER TABLE `detail_koperasi_anggota` ENABLE KEYS */;
+
+-- Dumping structure for table simdataku.detail_koperasi_kegiatan_usaha
+CREATE TABLE IF NOT EXISTS `detail_koperasi_kegiatan_usaha` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_koperasi` int(5) NOT NULL DEFAULT 0,
+  `nama_kegiatan` text DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table simdataku.detail_koperasi_kegiatan_usaha: ~2 rows (approximately)
+/*!40000 ALTER TABLE `detail_koperasi_kegiatan_usaha` DISABLE KEYS */;
+REPLACE INTO `detail_koperasi_kegiatan_usaha` (`id`, `id_koperasi`, `nama_kegiatan`, `keterangan`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'TEST', 'TEST', '2021-12-21 12:38:04', '2021-12-21 12:38:04'),
+	(3, 13, 'BANYAK', 'BANYAK', '2021-12-23 11:29:56', '2021-12-23 11:29:56');
+/*!40000 ALTER TABLE `detail_koperasi_kegiatan_usaha` ENABLE KEYS */;
+
+-- Dumping structure for table simdataku.detail_koperasi_pengawas
+CREATE TABLE IF NOT EXISTS `detail_koperasi_pengawas` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_koperasi` int(5) NOT NULL DEFAULT 0,
+  `nama_pengawas` varchar(50) DEFAULT NULL,
+  `masa_bakti` varchar(20) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table simdataku.detail_koperasi_pengawas: ~0 rows (approximately)
+/*!40000 ALTER TABLE `detail_koperasi_pengawas` DISABLE KEYS */;
+REPLACE INTO `detail_koperasi_pengawas` (`id`, `id_koperasi`, `nama_pengawas`, `masa_bakti`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'TEST', '2010', '2021-12-21 12:47:31', '2021-12-21 12:47:31'),
+	(2, 13, 'Harry', 'Setahun', '2021-12-23 11:30:21', '2021-12-23 11:30:21');
+/*!40000 ALTER TABLE `detail_koperasi_pengawas` ENABLE KEYS */;
+
+-- Dumping structure for table simdataku.detail_koperasi_pengurus
+CREATE TABLE IF NOT EXISTS `detail_koperasi_pengurus` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_koperasi` int(5) NOT NULL DEFAULT 0,
+  `ketua` varchar(50) DEFAULT NULL,
+  `sekretaris` varchar(50) DEFAULT NULL,
+  `bendahara` varchar(50) DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table simdataku.detail_koperasi_pengurus: ~0 rows (approximately)
+/*!40000 ALTER TABLE `detail_koperasi_pengurus` DISABLE KEYS */;
+REPLACE INTO `detail_koperasi_pengurus` (`id`, `id_koperasi`, `ketua`, `sekretaris`, `bendahara`, `created_at`, `updated_at`) VALUES
+	(3, 1, 'KAMU', 'AKU', 'KITA', '2021-12-21 12:50:24', '2021-12-21 12:50:24'),
+	(4, 13, 'Harry', 'Adi', 'Agik', '2021-12-23 11:30:29', '2021-12-23 11:30:29');
+/*!40000 ALTER TABLE `detail_koperasi_pengurus` ENABLE KEYS */;
+
 -- Dumping structure for table simdataku.detail_koperasi_tenaga_kerja
 CREATE TABLE IF NOT EXISTS `detail_koperasi_tenaga_kerja` (
   `id` int(1) NOT NULL AUTO_INCREMENT,
-  `id_usaha` int(5) DEFAULT NULL,
+  `id_koperasi` int(5) DEFAULT NULL,
   `nama_koperasi` varchar(50) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
   `tahun` int(4) DEFAULT NULL,
@@ -1977,7 +2059,7 @@ CREATE TABLE IF NOT EXISTS `detail_koperasi_tenaga_kerja` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table simdataku.detail_koperasi_tenaga_kerja: ~0 rows (approximately)
+-- Dumping data for table simdataku.detail_koperasi_tenaga_kerja: ~1 rows (approximately)
 /*!40000 ALTER TABLE `detail_koperasi_tenaga_kerja` DISABLE KEYS */;
 /*!40000 ALTER TABLE `detail_koperasi_tenaga_kerja` ENABLE KEYS */;
 
@@ -2049,7 +2131,7 @@ CREATE TABLE IF NOT EXISTS `detail_produk` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table simdataku.detail_produk: ~1 rows (approximately)
+-- Dumping data for table simdataku.detail_produk: ~2 rows (approximately)
 /*!40000 ALTER TABLE `detail_produk` DISABLE KEYS */;
 REPLACE INTO `detail_produk` (`id`, `id_usaha`, `nama_produk`, `deskripsi`, `harga`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 2209, 'Kentang Goreng', 'Kentang Goreng Terbaik yang dibuat dengan Kentang Pilihan', 100000, 0, '2021-09-24 14:44:03', '2021-09-24 14:44:03');
@@ -2108,7 +2190,7 @@ CREATE TABLE IF NOT EXISTS `detail_sarana` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table simdataku.detail_sarana: ~2 rows (approximately)
+-- Dumping data for table simdataku.detail_sarana: ~3 rows (approximately)
 /*!40000 ALTER TABLE `detail_sarana` DISABLE KEYS */;
 REPLACE INTO `detail_sarana` (`id`, `id_usaha`, `nama_sarana_fasilitas_alat`, `created_at`, `updated_at`) VALUES
 	(1, 2209, 'Blender', '2021-09-24 14:46:40', '2021-09-24 14:46:40'),
@@ -3937,6 +4019,44 @@ REPLACE INTO `ket_sumber_modal` (`id`, `keterangan`) VALUES
 	(6, 'Lainnya');
 /*!40000 ALTER TABLE `ket_sumber_modal` ENABLE KEYS */;
 
+-- Dumping structure for table simdataku.koperasi
+CREATE TABLE IF NOT EXISTS `koperasi` (
+  `id_koperasi` int(5) NOT NULL AUTO_INCREMENT,
+  `nama_koperasi` varchar(50) DEFAULT NULL,
+  `tahun_berdiri` int(5) DEFAULT NULL,
+  `tempat_kedudukan` varchar(50) DEFAULT NULL,
+  `no_badan_hukum` varchar(20) DEFAULT NULL,
+  `tgl_badan_hukum` date DEFAULT NULL,
+  `tgl_pad` date DEFAULT NULL,
+  `notaris` varchar(100) DEFAULT NULL,
+  `nomor_akta_perubahan_pad` varchar(50) DEFAULT NULL,
+  `notaris_camat_akta_pd` varchar(50) DEFAULT NULL,
+  `jangka_waktu_pendirian` varchar(20) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `desa` varchar(50) DEFAULT NULL,
+  `kecamatan` varchar(50) DEFAULT NULL,
+  `kabupaten` varchar(100) DEFAULT NULL,
+  `provinsi` varchar(50) DEFAULT NULL,
+  `kodepos` varchar(10) DEFAULT NULL,
+  `no_telpon` varchar(20) DEFAULT NULL,
+  `status_koperasi` varchar(10) DEFAULT NULL,
+  `nomor_fax` varchar(50) DEFAULT NULL,
+  `is_activated` int(5) DEFAULT 0,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id_user` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id_koperasi`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+
+-- Dumping data for table simdataku.koperasi: ~3 rows (approximately)
+/*!40000 ALTER TABLE `koperasi` DISABLE KEYS */;
+REPLACE INTO `koperasi` (`id_koperasi`, `nama_koperasi`, `tahun_berdiri`, `tempat_kedudukan`, `no_badan_hukum`, `tgl_badan_hukum`, `tgl_pad`, `notaris`, `nomor_akta_perubahan_pad`, `notaris_camat_akta_pd`, `jangka_waktu_pendirian`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `provinsi`, `kodepos`, `no_telpon`, `status_koperasi`, `nomor_fax`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
+	(4, 'KOPERASI SAYA', 2010, 'TEST', '100001', '2021-12-13', '2021-12-07', NULL, NULL, '10000000000', '2010', 'Tanjung', 'Cakranegara', 'Cakranegara', 'KOTA MATARAM', 'Nusa Tenggara Barat', '83614', '087851922063', 'Aktif', NULL, 0, '2021-12-21 14:37:15', '2021-12-21 14:42:18', 58),
+	(11, 'TEST COBA 1', 2013, 'Labuhan Haji', '12.14.14.141153.1111', '2013-12-12', '2013-12-01', 'TEST NOTARIS', '12.14.14.141153.0002', 'TEST NOTARIS CAMAT', 'Sebulan', 'Tanjung', 'Tanjung', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Nusa Tenggara Barat', '83614', '087812345099', 'Aktif', NULL, 0, '2021-12-23 11:23:32', '2021-12-23 11:23:32', 58),
+	(12, 'TEST COBA 2', 2012, 'Labuhan Haji', '12.14.14.141153.2222', '2012-12-13', '2012-12-02', 'TEST NOTARIS', '12.14.14.141153.0003', 'TEST NOTARIS CAMAT', 'Dua Bulan', 'Teros', 'Teros', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Nusa Tenggara Barat', '83614', '087812345098', 'Aktif', NULL, 0, '2021-12-23 11:23:32', '2021-12-23 11:23:32', 58),
+	(13, 'TEST COBA 3', 2011, 'Labuhan Haji', '12.14.14.141153.3333', '2011-12-14', '2011-12-03', 'TEST NOTARIS', '12.14.14.141153.0004', 'TEST NOTARIS CAMAT', 'Tiga Bulan', 'Korleko', 'Korleko', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Nusa Tenggara Barat', '83612', '087812345097', 'Aktif', NULL, 0, '2021-12-23 11:23:32', '2021-12-23 11:23:32', 58);
+/*!40000 ALTER TABLE `koperasi` ENABLE KEYS */;
+
 -- Dumping structure for view simdataku.last_updated
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `last_updated` (
@@ -3996,7 +4116,7 @@ CREATE TABLE IF NOT EXISTS `relawan` (
   PRIMARY KEY (`id_relawan`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table simdataku.relawan: ~1 rows (approximately)
+-- Dumping data for table simdataku.relawan: ~0 rows (approximately)
 /*!40000 ALTER TABLE `relawan` DISABLE KEYS */;
 REPLACE INTO `relawan` (`id_relawan`, `created_at`, `updated_at`, `deleted_at`, `nama_lengkap`, `ktp`, `jenis_kelamin`, `alamat`, `id_kawasan`, `telp`, `email`, `username`, `password`, `photo`) VALUES
 	(6, '2020-11-30 15:53:05', '2020-11-30 15:52:53', '2020-11-30 08:53:05', 'Fathurriadi', '5203171711960003', 'l', 'suryawangi', NULL, '0877666444253', 'Evhyie2@gmail.com', 'admin', 25, '83c18f2ffb4a31bc856b794d24debd55.jpg');
@@ -4015,7 +4135,7 @@ CREATE TABLE IF NOT EXISTS `target_verifikasi` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table simdataku.target_verifikasi: ~20 rows (approximately)
+-- Dumping data for table simdataku.target_verifikasi: ~21 rows (approximately)
 /*!40000 ALTER TABLE `target_verifikasi` DISABLE KEYS */;
 REPLACE INTO `target_verifikasi` (`id`, `kode_user`, `desa`, `kecamatan`, `kabupaten`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 72, 'Labuhan Haji', 'Labuhan Haji', 'Lombok Timur', 0, '2021-06-02 22:30:39', '2021-06-02 22:30:39'),
@@ -4050,6 +4170,12 @@ CREATE TABLE `total_data_desa_terdaftar` (
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `total_data_komoditas` (
 	`komoditas` VARCHAR(50) NULL COLLATE 'utf8mb4_general_ci',
+	`total` BIGINT(21) NOT NULL
+) ENGINE=MyISAM;
+
+-- Dumping structure for view simdataku.total_data_koperasi
+-- Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `total_data_koperasi` (
 	`total` BIGINT(21) NOT NULL
 ) ENGINE=MyISAM;
 
@@ -4128,7 +4254,7 @@ CREATE TABLE IF NOT EXISTS `usaha` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2212 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table simdataku.usaha: ~1,386 rows (approximately)
+-- Dumping data for table simdataku.usaha: ~1,366 rows (approximately)
 /*!40000 ALTER TABLE `usaha` DISABLE KEYS */;
 REPLACE INTO `usaha` (`id`, `nama_usaha`, `bentuk_usaha`, `no_npwp_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `jenis_kelamin`, `nik`, `pendidikan_terakhir`, `no_npwp_pribadi`, `alamat_pemilik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa_pemilik`, `jalan_pemilik`, `kode_pos_pemilik`, `kecamatan_pemilik`, `kabupaten_pemilik`, `desa`, `jalan`, `kode_pos`, `lat`, `lng`, `kecamatan`, `kabupaten`, `merek_produk`, `jenis_produk`, `komoditas`, `usaha_lain`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_anggota_koperasi`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 	(5, 'Perorangan (Sukardi)', NULL, NULL, 2018, '11111111111', '-', NULL, '0', NULL, NULL, NULL, 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kec. Tarano Kab. Sumbawa', NULL, NULL, NULL, NULL, NULL, 'Labuhan Aji', NULL, NULL, NULL, NULL, 'Tarano', 'Kabupaten Sumbawa', NULL, NULL, 'Perikanan', NULL, 100, NULL, 'Bulan', NULL, NULL, NULL, 'ONLINE', 'Nasional', 1000, 3, '0', '0', '', 0, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -5539,7 +5665,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`kode_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10010 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table simdataku.user: ~13 rows (approximately)
+-- Dumping data for table simdataku.user: ~12 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 REPLACE INTO `user` (`kode_user`, `nama_lengkap`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `email`, `telp`, `username`, `password`, `kode_admin`, `bidang`, `level`, `created_at`, `updated_at`) VALUES
 	(0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c9b3a00abecf2366d57bd989e043eec4', 'admin', NULL, NULL, '2021-08-27 11:11:27', '2021-09-14 06:21:52'),
@@ -5565,7 +5691,7 @@ CREATE TABLE IF NOT EXISTS `visitors` (
   `pengunjung_perangkat` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table simdataku.visitors: ~104 rows (approximately)
+-- Dumping data for table simdataku.visitors: ~100 rows (approximately)
 /*!40000 ALTER TABLE `visitors` DISABLE KEYS */;
 REPLACE INTO `visitors` (`pengunjung_id`, `pengunjung_tanggal`, `pengunjung_ip`, `pengunjung_perangkat`) VALUES
 	(930, '2018-08-09 07:04:59', '::1', 'Chrome'),
@@ -5671,7 +5797,9 @@ REPLACE INTO `visitors` (`pengunjung_id`, `pengunjung_tanggal`, `pengunjung_ip`,
 	(0, '2021-12-07 12:53:32', '::1', 'Chrome'),
 	(0, '2021-12-08 20:12:42', '::1', 'Chrome'),
 	(0, '2021-12-11 02:01:49', '::1', 'Chrome'),
-	(0, '2021-12-12 07:49:54', '::1', 'Chrome');
+	(0, '2021-12-12 07:49:54', '::1', 'Chrome'),
+	(0, '2021-12-21 14:44:17', '::1', 'Chrome'),
+	(0, '2021-12-23 10:20:33', '::1', 'Chrome');
 /*!40000 ALTER TABLE `visitors` ENABLE KEYS */;
 
 -- Dumping structure for view simdataku.daftar_sebaran_usaha_lengkap_belum_verifikasi
@@ -5683,6 +5811,11 @@ CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `daftar_sebaran_usaha_lengk
 -- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `daftar_sebaran_usaha_lengkap_terverifikasi`;
 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `daftar_sebaran_usaha_lengkap_terverifikasi` AS select `usaha`.`desa` AS `desa`,`usaha`.`kecamatan` AS `kecamatan`,`usaha`.`kabupaten` AS `kabupaten`,count(`usaha`.`desa`) AS `total` from `usaha` where `usaha`.`is_verified` = 1 group by `usaha`.`desa` order by `usaha`.`kecamatan` desc;
+
+-- Dumping structure for view simdataku.data_koperasi_perkabupaten
+-- Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `data_koperasi_perkabupaten`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `data_koperasi_perkabupaten` AS select `koperasi`.`kabupaten` AS `kabupaten`,count(0) AS `total` from `koperasi` group by `koperasi`.`kabupaten` order by count(0) desc;
 
 -- Dumping structure for view simdataku.data_sebaran_desa
 -- Removing temporary table and create final VIEW structure
@@ -5758,6 +5891,11 @@ CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `total_data_desa_terdaftar`
 -- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `total_data_komoditas`;
 CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `total_data_komoditas` AS select `usaha`.`komoditas` AS `komoditas`,count(0) AS `total` from `usaha` group by `usaha`.`komoditas`;
+
+-- Dumping structure for view simdataku.total_data_koperasi
+-- Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `total_data_koperasi`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `total_data_koperasi` AS select count(0) AS `total` from `koperasi` where `koperasi`.`is_activated` = 0;
 
 -- Dumping structure for view simdataku.total_data_metode_pemasaran
 -- Removing temporary table and create final VIEW structure
