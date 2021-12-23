@@ -145,7 +145,7 @@ var chart = new CanvasJS.Chart("chartContainer_komoditas", {
 	animationEnabled: true,
 	theme: "light2",
 	title:{
-		text: "Total Data Usaha Berdasarkan Kelas"
+		text: "Total Data Usaha Berdasarkan Komoditas"
 	},
 	axisY: {
 		title: "Data Perkomoditas"

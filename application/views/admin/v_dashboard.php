@@ -32,7 +32,7 @@ tfoot input {
 
             <!-- Main content -->
             <section class="content">
-            <?php include_once "parsial/summary.php"; ?>    
+            <?php include_once "parsial/summary.php"; ?>     
 
                 <div class="row">  
              

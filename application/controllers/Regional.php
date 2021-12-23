@@ -17,15 +17,13 @@ class Regional extends CI_Controller{
 	}
 
 	
-
-	
 	function get_perwilayah($wilayah){
 
-
+ 
 		$x['wilayah'] = $wilayah; 
 		$x['data'] = $this->m_usaha->get_data_kecamatan_perkabupaten($wilayah)->result();  
 		
-		$this->load->view('depan/v_usaha_perwilayah',$x);  
+		$this->load('depan/v_usaha_perwilayah',$x);  
 	}
 
 	

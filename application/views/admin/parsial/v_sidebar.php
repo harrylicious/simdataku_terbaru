@@ -17,18 +17,18 @@ error_reporting(0);
         </li>
 
         
-        <!-- 
+   
         <li>
-          <a href="<?php echo base_url('admin/document'); ?>">
-            <i class="fa fa-list"></i> <span>Daftar Arsip</span>
+          <a href="<?php echo base_url('admin/usaha').''?>">
+            <i class="fa fa-list"></i> <span>Data Usaha</span>
             <span class="pull-right-container">
               <small class="label pull-right"></small>
             </span>
           </a>
-        </li> -->
+        </li>
         <li>
-          <a href="<?php echo base_url('admin/usaha').''?>">
-            <i class="fa fa-plus"></i> <span>Data Usaha</span>
+          <a href="<?php echo base_url('admin/koperasi').''?>">
+            <i class="fa fa-list"></i> <span>Data Koperasi</span>
             <span class="pull-right-container">
               <small class="label pull-right"></small>
             </span>
@@ -38,7 +38,16 @@ error_reporting(0);
         
         <li>
           <a href="<?php echo base_url('admin/usaha/tambah/'.$_SESSION['idadmin']); ?>">
-            <i class="fa fa-plus"></i> <span>Tambah</span>
+            <i class="fa fa-plus"></i> <span>Tambah Usaha</span>
+            <span class="pull-right-container">
+              <small class="label pull-right"></small>
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="<?php echo base_url('admin/koperasi/tambah/'.$_SESSION['idadmin']); ?>">
+            <i class="fa fa-plus"></i> <span>Tambah Koperasi</span>
             <span class="pull-right-container">
               <small class="label pull-right"></small>
             </span>
@@ -130,6 +139,15 @@ error_reporting(0);
           }
 
           ?>
+          
+        <li>
+          <a href="<?php echo base_url('admin/koperasi/tambah/'.$_SESSION['idadmin']); ?>">
+            <i class="fa fa-plus"></i> <span>Tambah Koperasi</span>
+            <span class="pull-right-container">
+              <small class="label pull-right"></small>
+            </span>
+          </a>
+        </li>
  
         <li>
           <a href="<?php echo base_url('admin/login/logout');

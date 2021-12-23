@@ -1077,7 +1077,7 @@
                                             <div class="form-group">
                                                 <button class="btn btn-success" data-toggle="modal"
                                                     data-target="#modal-media-sosial"><i class="fa fa-plus"></i> TAMBAH
-                                                    MEDIA SOSIAL</button>
+                                                    MEDIA SOSIAL</button> 
                                             </div>
                                         </div>
                                     </div>

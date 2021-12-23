@@ -8,8 +8,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?php echo base_url() . 'assets/images/favicon.png' ?>" rel="icon">
-  <link href="<?php echo base_url() . 'assets/images/favicon.png' ?>" rel="apple-touch-icon">
+  <link href="<?php echo base_url() . 'assets/images/icon.png' ?>" rel="icon">
+  <link href="<?php echo base_url() . 'assets/images/icon.png' ?>" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -77,19 +77,20 @@
         <ul>
           <li><a class="active" href="<?php echo site_url(''); ?>">Beranda</a></li>
           <li><a href="<?php echo site_url('usaha'); ?>">Usaha</a></li>
+          <li><a href="<?php echo site_url('koperasi'); ?>">Koperasi</a></li>
           <li><a href="<?php echo site_url('komoditas'); ?>">Komoditas</a></li>
           <li><a href="<?php echo site_url('regional'); ?>">Regional</a></li>
           <li class="dropdown"><a href="<?php echo site_url('datausaha'); ?>">Datasheet</a></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
+                <!-- <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
                   <li><a href="#">Deep Drop Down 3</a></li>
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
+                </ul> -->
               </li>
             </ul>
           </li>

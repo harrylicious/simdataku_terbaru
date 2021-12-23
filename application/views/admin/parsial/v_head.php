@@ -3,7 +3,8 @@
 <title>SIMDATAKU - Dinas Koperasi Provinsi NTB</title>
 <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/logo.png'?>">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/logo.png'?>">
+  <link href="<?php echo base_url() . 'assets/images/icon.png' ?>" rel="icon">
+  <link href="<?php echo base_url() . 'assets/images/icon.png' ?>" rel="apple-touch-icon">
 <!-- Bootstrap 3.3.6 -->
 <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
 <!-- Font Awesome -->

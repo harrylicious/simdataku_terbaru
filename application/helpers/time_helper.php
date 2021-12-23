@@ -27,6 +27,15 @@ function last_updated() {
 
 }
 
+if (!function_exists('tgl_default')) {
+     function tgl_default($date){
+ 
+       $newdate = date("d-m-Y", strtotime($date));
+     
+       return $newdate;
+     }
+     }
+
 
 function get_bulan($no)
 {

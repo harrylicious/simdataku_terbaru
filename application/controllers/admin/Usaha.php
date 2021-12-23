@@ -57,10 +57,6 @@ class Usaha extends CI_Controller{
 			$x['mataram'] = $this->m_usaha->get_all_perkabupaten("Kota Mataram")->row_array();
 			$x['dompu'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Dompu")->row_array();
 			
-			$x['musnah'] = $this->m_usaha->get_data_perkomoditas("Musnah", $wilayah);  
-			$x['berkas_perorangan'] = $this->m_usaha->get_data_perkomoditas("Berkas Perorangan", $wilayah); 
-			$x['dinilai_kembali'] = $this->m_usaha->get_data_perkomoditas("Dinilai Kembali", $wilayah); 
-			$x['permanen'] = $this->m_usaha->get_data_perkomoditas("Permanen", $wilayah); 
 
 			if ($this->session->userdata('level') == "superadmin") {
 				$x['data'] = $this->m_usaha->get_all();  
@@ -163,10 +159,6 @@ class Usaha extends CI_Controller{
 			$x['mataram'] = $this->m_usaha->get_all_perkabupaten("Kota Mataram")->row_array();
 			$x['dompu'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Dompu")->row_array();
 			
-			$x['musnah'] = $this->m_usaha->get_data_perkomoditas("Musnah", $wilayah);  
-			$x['berkas_perorangan'] = $this->m_usaha->get_data_perkomoditas("Berkas Perorangan", $wilayah); 
-			$x['dinilai_kembali'] = $this->m_usaha->get_data_perkomoditas("Dinilai Kembali", $wilayah); 
-			$x['permanen'] = $this->m_usaha->get_data_perkomoditas("Permanen", $wilayah); 
 
 			$this->load->view('admin/v_verifikasi_usaha',$x); 
 			
@@ -299,7 +291,7 @@ class Usaha extends CI_Controller{
 
 	
 
-	function tambah($id) {
+	function tambah($id) { 
 
 		
 		$idadmin = $this->session->userdata('idadmin');
@@ -647,7 +639,8 @@ public function import_excel(){
 }
 
 
-public function import_update_excel(){
+public function import_update_excel()
+{
 	$unit_arsip=$this->session->kode_uk_up;
 			  
 	$file_mimes = array('application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 
@@ -723,7 +716,7 @@ public function import_update_excel(){
 		  
 		}
 				
-		}
+}
 
 
 		function delete_data($id){

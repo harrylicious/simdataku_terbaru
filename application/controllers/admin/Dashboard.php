@@ -56,7 +56,7 @@ class Dashboard extends CI_Controller{
 			$x['dompu'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Dompu")->row_array();
 			
 			
-			$this->load->view('admin/v_dashboard',$x);
+			$this->load->view('admin/v_dashboard',$x); 
 		}else{
 			redirect('administrator');
 		}

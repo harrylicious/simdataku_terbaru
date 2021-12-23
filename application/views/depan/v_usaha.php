@@ -34,7 +34,7 @@ foreach ($data_grafik as $data) {
 
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-12 hero-text-image">
+      <div class="col-12 hero-text-image" style="background:<?php echo base_url('assets/images/header.jpg'); ?>">
         <div class="row">
           <div class="col-lg-8 text-center text-lg-start">
             <h1 data-aos="fade-right">SIMDATAKU DISKOP</h1>

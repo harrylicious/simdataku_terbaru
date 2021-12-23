@@ -88,8 +88,8 @@
                                 <button class="btn btn-success  btn-block" data-toggle="modal"
                                     data-target="#modal-default"><i class="fa fa-upload"> Import data</i></button>
                                 <a class="btn btn-success  btn-block"
-                                    href="<?= base_url('assets/uploads/template/template-tambah.xls'); ?>"
-                                    download="template-tambah.xls"><span class="fa fa-arrow-down"></span> Download
+                                    href="<?= base_url('assets/uploads/template/template-tambah-usaha.xls'); ?>"
+                                    download="template-tambah-usaha.xls"><span class="fa fa-arrow-down"></span> Download
                                     template</a>
                             </div>
                             <!-- /.box-body -->
@@ -1022,6 +1022,6 @@
     });
 
     map.setCenter(myMarker.position);
-    myMarker.setMap(map);
+    myMarker.setMap(map); 
 </script>
 

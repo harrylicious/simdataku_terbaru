@@ -7,15 +7,15 @@
 
 </head>
 
-<body class="hold-transition login-page l-bg-red-dark">
+<body class="hold-transition login-page l-bg-blue-dark">
   <div class="login-box">
     <div>
       <p><?php echo $this->session->flashdata('msg'); ?></p>
     </div>
     <!-- /.login-logo --> 
     <div class="login-box-body p-3 mb-2 bg-gradient-danger">
-      <p class="login-box-msg"> <img width="100;" src="<?php echo base_url() . 'assets/images/logo.png' ?>"></p>
-      <h5 class="login-box-msg"> Login SIMPUL - Dinas Perdagangan Provinsi NTB</h5>
+      <p class="login-box-msg"> <img width="100;" src="<?php echo base_url() . 'assets/images/icon.png' ?>"></p>
+      <h5 class="login-box-msg"> Login SIMDATAKU - Dinas Koperasi & UMKM Provinsi NTB</h5>
       <hr />
 
       <form action="<?php echo site_url() . 'admin/login/auth' ?>" method="post">
@@ -35,7 +35,7 @@
           </div>
           <!-- /.col -->
           <div class="col-xs-12">
-            <button type="submit" class="btn btn-danger btn-block btn-flat">Sign In</button>
+            <button type="submit" class="btn btn-info btn-block btn-flat">Sign In</button>
           </div>
           <!-- /.col -->
         </div>
@@ -45,7 +45,7 @@
       <!-- /.social-auth-links -->
       <hr />
       <p>
-        <center>Copyright <?php echo date('Y'); ?> by Dinas Perdagangan Provinsi NTB All Right Reserved</center>
+        <center>Copyright <?php echo date('Y'); ?> by Dinas Koperasi & UMKM Provinsi NTB All Right Reserved</center>
       </p>
     </div>
     <!-- /.login-box-body -->

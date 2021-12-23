@@ -48,6 +48,40 @@ class M_wilayah extends CI_Model{
 
     }
 
+    
+    // get all
+    function get_data_kecamatan_perkabupaten($kabupaten){  
+        if ($kabupaten == "SEMUA") { 
+            return $this->db->query("select *from data_wilayah where LENGTH(kode) = 8"); 
+        }
+        else {
+            return $this->db->query("select *from data_wilayah where SUBSTR(kode, 1, 5) = '".urldecode($kabupaten)."' AND LENGTH(kode) = 8"); 
+        }
+
+    }
+
+    
+    // get all
+    function get_data_desa_perkecamatan($kecamatan){ 
+        if ($kecamatan == "SEMUA") { 
+            return $this->db->query("select *from data_wilayah where LENGTH(kode) = 13"); 
+        }
+        else {
+            return $this->db->query("select *from data_wilayah where SUBSTR(kode, 1, 8) = '".urldecode($kecamatan)."' AND LENGTH(kode) = 13"); 
+        }
+
+    }
+
+    // get all
+    function get_data_desa_perkabupaten($kabupaten){ 
+        if ($kabupaten == "SEMUA") { 
+            return $this->db->query("select *from data_wilayah where LENGTH(kode) = 10"); 
+        }
+        else {
+            return $this->db->query("select *from data_wilayah where SUBSTR(kode, 1, 5) = '".urldecode($kabupaten)."' AND LENGTH(kode) = 10"); 
+        }
+
+    }
 
     //insert data
     function insert($data){
