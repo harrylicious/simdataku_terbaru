@@ -20,7 +20,7 @@
     <div class="col-md-12">
       <div class="card ">
         <div class="card-header ">
-        <h5 class="card-title"> <strong>DAFTAR SEMUA UMKM KABUPATEN/KOTA</strong></h5>
+        <h5 class="card-title"> <strong>DAFTAR SEMUA KOPERASI KABUPATEN/KOTA</strong></h5>
         </div>
         <div class="card-body ">
 
@@ -41,8 +41,8 @@
                 ?>
                   <tr>
                     <td><?= $no++; ?></td>
-                    <td><?= $row->kabupaten; ?></td>
-                    <td><?= $row->total; ?> Usaha</td>
+                    <td><?= strtoupper($row->kabupaten); ?></td>
+                    <td><?= $row->total; ?> Koperasi</td>
                   </tr>
 
                 <?php

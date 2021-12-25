@@ -17,7 +17,7 @@ class M_koperasi extends CI_Model{
     public $tabel_target_verifikasi ="target_verifikasi";
 
     public $view_koperasi_admin ="data_koperasi_dan_admin";
-    public $view_perkabupaten ="data_koperasi_perkabupaten";
+    public $view_perkabupaten ="data_koperasi_perkabupaten"; 
     public $view_perkomoditas ="data_koperasi_perkomoditas";
     public $view_metode_pemasaran ="total_data_metode_pemasaran";
     public $view_skala_pasar ="total_data_skala_pasar";
@@ -253,6 +253,7 @@ class M_koperasi extends CI_Model{
         return $this->db->get($this->view_perkabupaten);  
 
     }
+    
 
 
 

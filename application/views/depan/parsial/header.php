@@ -80,20 +80,21 @@
           <li><a href="<?php echo site_url('koperasi'); ?>">Koperasi</a></li>
           <li><a href="<?php echo site_url('komoditas'); ?>">Komoditas</a></li>
           <li><a href="<?php echo site_url('regional'); ?>">Regional</a></li>
-          <li class="dropdown"><a href="<?php echo site_url('datausaha'); ?>">Datasheet</a></i></a>
+          <li><a href="<?php echo site_url('datausaha'); ?>">Datasheet</a></li>
+          <!-- <li class="dropdown"><a href="<?php echo site_url('datausaha'); ?>">Datasheet</a></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <!-- <ul>
+                <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
                   <li><a href="#">Deep Drop Down 3</a></li>
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
-                </ul> -->
+                </ul>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li><a href="<?php echo site_url('administrator'); ?>" class="get-started-btn scrollto nav-item">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

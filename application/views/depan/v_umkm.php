@@ -53,7 +53,6 @@
                 <th>Nama UMKM</th>
                 <th>Alamat</th>
                 <th>Kecamatan</th>
-                <th>Aksi</th>
               </tr>
             </thead>
 
@@ -67,7 +66,6 @@
                   <td><?= $row->nama_usaha; ?></td>
                   <td><?= $row->alamat; ?></td>
                   <td><?= $row->kecamatan; ?></td>
-                  <td><a href="<?= base_url('usaha/detail/') . $row->id; ?>" class="btn btn-danger">Detail</a></td>
                 </tr>
 
               <?php
