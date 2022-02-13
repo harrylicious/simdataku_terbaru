@@ -3,7 +3,7 @@ class Usaha extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('download');
-		$this->load->model('m_usaha');    
+		$this->load->model('m_usaha');     
 	}
  
 	function index(){ 

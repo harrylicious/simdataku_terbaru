@@ -82,8 +82,8 @@ foreach ($data_grafik_komoditas as $data) {
         </div>
 
         
-    </div>
-</div>
+      </div>
+    </section>
 
     <?php include_once "parsial/footer.php"; ?>
   

@@ -1,5 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+ 
+$limit = 50000;
+$y = 100;
+$dataPoints = array();
+
+foreach ($data_grafik as $data) {
+  $bulan = get_bulan(substr($data->tgl, 5, 2));
+	array_push($dataPoints, array("label" => $bulan." ".substr($data->tgl, 0, 4), "y" => $data->total));
+}
+
+
+ $dataPoints_kelas = array();
+ 
+ $total_data = $total_semua_data - $total_data_grafik;
+ 
+ foreach ($data_grafik_kelas_usaha as $data) {
+   array_push($dataPoints_kelas, array("label" => $data->ket, "y" => $data->total));
+ }
+ array_push($dataPoints_kelas, array("label" => "Belum terverifikasi", "y" => $total_data));
+ 
+  
+ $dataPoints_komoditas = array();
+ 
+ foreach ($data_grafik_komoditas as $data) {
+   array_push($dataPoints_komoditas, array("label" => $data->komoditas, "y" => $data->total));
+ }
+ 
+ ?>
 
 <?php include_once "parsial/header.php"; ?>
 
@@ -20,7 +49,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row"> 
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="">
             <div class="feature-1 text-center">
               <div class="wrap-icon icon-1">
@@ -89,107 +118,68 @@
 
     </section>
 
-
-    <!-- ======= Testimonials Section ======= -->
-    <section class="section border-top border-bottom">
+    <section class="section">
       <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-          <div class="col-md-8">
-            <h2 class="section-heading">Testimoni Pelapak</h2>
-          </div>
-        </div>
-        <div class="row justify-content-center text-center">
-          <div class="col-md-7">
-
-            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-              <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-                  <div class="review text-center">
-                    <p class="stars">
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill muted"></span>
-                    </p>
-                    <h3>Excellent App!</h3>
-                    <blockquote>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-                        aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-                        provident voluptates consectetur maiores quos.</p>
-                    </blockquote>
-
-                    <p class="review-user">
-                      <img src="assets/img/person_1.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
-                      <span class="d-block">
-                        <span class="text-black">Jean Doe</span>, &mdash; App User
-                      </span>
-                    </p>
-
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="review text-center">
-                    <p class="stars">
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill muted"></span>
-                    </p>
-                    <h3>This App is easy to use!</h3>
-                    <blockquote>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-                        aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-                        provident voluptates consectetur maiores quos.</p>
-                    </blockquote>
-
-                    <p class="review-user">
-                      <img src="assets/img/person_2.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
-                      <span class="d-block">
-                        <span class="text-black">Johan Smith</span>, &mdash; App User
-                      </span>
-                    </p>
-
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="review text-center">
-                    <p class="stars">
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill"></span>
-                      <span class="bi bi-star-fill muted"></span>
-                    </p>
-                    <h3>Awesome functionality!</h3>
-                    <blockquote>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-                        aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-                        provident voluptates consectetur maiores quos.</p>
-                    </blockquote>
-
-                    <p class="review-user">
-                      <img src="assets/img/person_3.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
-                      <span class="d-block">
-                        <span class="text-black">Jean Thunberg</span>, &mdash; App User
-                      </span>
-                    </p>
-
-                  </div>
-                </div><!-- End testimonial item -->
-
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title"> <strong>GRAFIK PERTUMBUHAN USAHA</strong></h5>
               </div>
-              <div class="swiper-pagination"></div>
+              <div class="card-body ">
+
+              <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section><!-- End Testimonials Section -->
+  
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title"><strong>GRAFIK USAHA BERDASARKAN KELAS</strong></h5>
+                <!-- <p class="card-category">Sebaran Data Per</p> -->
+              </div>
+              <div class="card-body">
+                
+              <div id="chartContainer_kelas" style="height: 370px; width: 100%;"></div>
+              <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+        <div class="row mt-4 mb-4">
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title"><strong>GRAFIK USAHA BERDASARKAN KOMODITAS</strong></h5>
+              </div>
+              <div class="card-body ">
+              <div id="chartContainer_komoditas" style="height: 370px; width: 100%;"></div>
+              <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        
+      </div>
+    </section>
+
+    
     <!-- ======= CTA Section ======= -->
     <section class="section cta-section">
       <div class="container">
@@ -210,3 +200,60 @@
 </body>
 
 </html>
+
+<script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	title: {
+		text: "Pertumbuhan Data Usaha Masuk Perbulan"
+	},
+	axisY: {
+		title: "Total Data Usaha"
+	},
+	data: [{
+		type: "line",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+ 
+ 
+var chart = new CanvasJS.Chart("chartContainer_kelas", {
+	animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "Total Data Usaha Berdasarkan Kelas"
+	},
+	subtitles: [{
+		text: "Kelas: Mikro, Kecil, Menengah, Besar"
+	}],
+	data: [{
+		type: "pie",
+		yValueFormatString: "#,##0.00\"%\"",
+		indexLabel: "{label} ({y})",
+		dataPoints: <?php echo json_encode($dataPoints_kelas, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+
+var chart = new CanvasJS.Chart("chartContainer_komoditas", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Total Data Usaha Berdasarkan Komoditas"
+	},
+	axisY: {
+		title: "Data Perkomoditas"
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,##0.## usaha",
+		dataPoints: <?php echo json_encode($dataPoints_komoditas, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>

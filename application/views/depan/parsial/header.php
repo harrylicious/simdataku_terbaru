@@ -95,7 +95,7 @@
               </li>
             </ul>
           </li> -->
-          <li><a href="<?php echo site_url('administrator'); ?>" class="get-started-btn scrollto nav-item">Login</a></li>
+          <!-- <li><a href="<?php echo site_url('administrator'); ?>" class="get-started-btn scrollto nav-item">Login</a></li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
